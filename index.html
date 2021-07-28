@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>To-Do-List</title>
+	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+<body>
+	<div id="app"></div>
+	<div id="count"></div>
+	<script type="text/babel">
+		class App extends React.Component {
+			constructor(props) {
+				super(props);
+				this.state = {
+					tasks : ["first task", "second task", "third task"],
+					input : ""
+				};
+			}
+
+			render() {
+				return (
+					<div>
+						<h1>Tasks to finish</h1>
+						<table>
+							<thead>
+							<tr>
+								<th>Task</th>
+								<th>Action</th>
+							</tr>
+							</thead>
+							<tbody>
+							{this.state.tasks.map((task, i) =>
+								<tr key={i}>
+									<td>{task}</td>
+									<td><button onClick={() => this.handleDelete(i)}>Delete</button></td>
+								</tr>
+							)}
+							</tbody>
+						</table>
+						<div>Number of Tasks in hand : {this.state.tasks.length}</div>
+						<input type="text" name="task" id="task" onChange={this.handleChange} value={this.state.input} /> &nbsp;
+						<input type="submit" name="submit" id="submit" value="Add Task" onClick={this.handleClick} />
+					</div>
+				);
+			}
+
+			handleChange = (event) => {
+				this.setState({
+					input : event.target.value
+				});
+			}
+
+			handleClick = () => {
+				this.setState(state => ({
+					tasks : [...state.tasks, state.input],
+					input : ""
+				}))
+			}
+
+			handleDelete = (key) => {
+				const val = this.state.tasks
+
+				if(key > -1) {
+					val.splice(key, 1);
+				}
+				this.setState({
+					tasks : val,
+					input : ""
+				});
+			}
+		}
+
+		ReactDOM.render(<App />, document.getElementById("app"));
+	</script>
+</body>
+</html>

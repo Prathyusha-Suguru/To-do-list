@@ -6,10 +6,23 @@
 	<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 	<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+	<style>
+		body{
+			background-color: rgb(233, 230, 230);
+		}
+		tr, td{
+			padding-left: 30px;
+		}
+		.center{
+			margin: 30px 0px 0px 600px;
+		}
+	</style>
 </head>
 <body>
+	<div class="center">
 	<div id="app"></div>
 	<div id="count"></div>
+	</div>
 	<script type="text/babel">
 		class App extends React.Component {
 			constructor(props) {
@@ -40,7 +53,9 @@
 							)}
 							</tbody>
 						</table>
+						<br />
 						<div>Number of Tasks in hand : {this.state.tasks.length}</div>
+						<br />
 						<input type="text" name="task" id="task" onChange={this.handleChange} value={this.state.input} /> &nbsp;
 						<input type="submit" name="submit" id="submit" value="Add Task" onClick={this.handleClick} />
 					</div>
